@@ -47,20 +47,6 @@ public class FragmentViewPagerDetails extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //change toolbar menu
-        Toolbar mToolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-//        ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
-        setHasOptionsMenu(true);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
-//        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
-        mToolbar.setNavigationIcon(ContextCompat.getDrawable(getActivity(), R.drawable.ic_arrow_back_white_24dp));
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().onBackPressed();
-            }
-        });
         mCardDataType = getArguments().getString(Constants.CARD_DATA_TYPE, Constants.CARD_TYPE_JLPT_N3);
         mPageId = getArguments().getInt(Constants.DETAIL_VIEW_PAGER_ID, 0);
         Log.d("nobita", "oncreate, card_data: " + mCardDataType + ", id: " + mPageId);
@@ -88,28 +74,6 @@ public class FragmentViewPagerDetails extends Fragment {
         txtEx.setText(item.getEx());
 
         return layout;
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        menu.clear();
-        inflater.inflate(R.menu.menu_detail_view, menu);
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Log.d("nobita", "item click: " + item.getItemId());
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                getActivity().onBackPressed();
-                return true;
-            default:
-                Toast.makeText(getActivity(), "This feature is coming soon", Toast.LENGTH_SHORT).show();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
 }

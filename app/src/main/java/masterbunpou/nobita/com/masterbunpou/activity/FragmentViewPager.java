@@ -5,12 +5,18 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.Collections;
 import java.util.List;
@@ -57,6 +63,20 @@ public class FragmentViewPager extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //change toolbar menu
+        Toolbar mToolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+//        ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
+        setHasOptionsMenu(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
+        mToolbar.setNavigationIcon(ContextCompat.getDrawable(getActivity(), R.drawable.ic_arrow_back_white_24dp));
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().onBackPressed();
+            }
+        });
         mCardType = getArguments().getString(Constants.CARD_DATA_TYPE);
         mFirstDisplay = getArguments().getInt(Constants.VIEW_PAGER_ID);
         mListData = Utils.getData(getActivity(), mCardType);
@@ -65,7 +85,7 @@ public class FragmentViewPager extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.frag_viewpager, container, false);
+        final View view = inflater.inflate(R.layout.frag_viewpager, container, false);
         mViewPager = (ViewPager) view.findViewById(R.id.detail_pager);
 //        String cardDataType = getArguments().getString(Constants.CARD_DATA_TYPE);
 
@@ -93,8 +113,51 @@ public class FragmentViewPager extends Fragment {
 
             }
         });
+
+        //animating the scroll
+        mViewPager.setPageTransformer(false, new ViewPager.PageTransformer() {
+            @Override
+            public void transformPage(View page, float position) {
+                int pageWidth = page.getWidth();
+                int pageHeight = page.getHeight();
+
+                if(position < -1) {
+                    //way-off screen to the left
+                    page.setAlpha(0);
+                } else if (position <=1) {
+                    //modify here for pages in view
+                } else  {
+                    page.setAlpha(0);
+                }
+
+            }
+        });
 //        new setAdapterTask().execute();
         return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.menu_detail_view, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d("nobita", "item click: " + item.getItemId());
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                getActivity().onBackPressed();
+                return true;
+            case R.id.action_bookmark:
+                Toast.makeText(getActivity(), "Bookmark for id: "+ mViewPager.getCurrentItem() + "This feature is coming soon", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                Toast.makeText(getActivity(), "This feature is coming soon", Toast.LENGTH_SHORT).show();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private class setAdapterTask extends AsyncTask<Void, Void, Void> {
