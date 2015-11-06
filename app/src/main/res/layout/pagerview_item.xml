@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:paddingBottom="12dp"
+    android:background="@color/windowBackground"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:background="@color/windowBackground">
+<!--    <ProgressBar
+        android:layout_width="@dimen/progress_bar_width"
+        android:layout_height="@dimen/progress_bar_height"
+        android:id="@+id/progress_bar_detail_view"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_gravity="center"
+        android:progress="0"
+        android:progressDrawable="@drawable/circular"
+        />-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_pager_title"
+        android:textColor="@color/textColorPrimaryDark"
+        android:paddingTop="24dp"
+        android:textSize="24sp"
+        android:layout_gravity="center"
+        android:text="Vてごらん"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_viewpager_meaning_title"
+        android:paddingTop="12dp"
+        android:textColor="@color/textColorPurple"
+        android:textSize="14sp"
+        android:text="@string/card_view_title_meaning"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_viewpager_meaning"
+        android:paddingTop="8dp"
+        android:textColor="@color/textColorPrimaryDark"
+        android:textSize="14sp"
+        android:text="Dùng để nói với ai đó thử làm 1 điều gì đó. (Thường là nói với người dưới mình.)
+Tương đương mẫu Vてみなさい (V-te minasai)."/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="12dp"
+        android:id="@+id/txt_viewpager_usage_title"
+        android:textColor="@color/textColorPurple"
+        android:textSize="14sp"
+        android:text="@string/card_view_title_usage"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:id="@+id/txt_viewpager_usage"
+        android:textColor="@color/textColorPrimaryDark"
+        android:textSize="14sp"
+        android:text="Cách sử dụng rất đơn giản, đưa động từ về thể \u0022te\u0022 rồi thêm \u0022goran\u0022 vào."/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="12dp"
+        android:id="@+id/txt_viewpager_ex_title"
+        android:textColor="@color/textColorPurple"
+        android:textSize="14sp"
+        android:text="@string/card_view_title_ex"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:id="@+id/txt_viewpager_ex"
+        android:textColor="@color/textColorPrimaryDark"
+        android:textSize="14sp"
+        android:text="1. これ、美味しいよ。食べてごらん。(=食べてみなさい)
+Kore, oishii yo. Tabete goran. (=Tabete minasai)
+Cái này ngon lắm đó. Cậu ăn thử đi.
+
+2. 分からなかったら、先生に聞いてごらん。(=聞いてみなさい)
+Wakarana kattara sensei ni kiite goran.
+Nếu mà không hiểu thì hãy thử hỏi giáo viên.
+
+3. もう一度やってごらん。(=やってみなさい)
+Mou ichido yatte goran. (=yatte minasai)
+Thử làm lại 1 lần nữa đi."/>
+</LinearLayout>
+</ScrollView>

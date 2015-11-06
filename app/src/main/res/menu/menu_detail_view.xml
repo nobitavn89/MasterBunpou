@@ -1,0 +1,23 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<!--    <item
+        android:id="@android:id/home"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="@string/action_home" />
+
+    <item
+        android:id="@+id/action_edit"
+        android:icon="@drawable/ic_mode_edit_white_18dp"
+        android:orderInCategory="100"
+        android:title="@string/action_edit"
+        app:showAsAction="always" />-->
+
+    <item
+        android:id="@+id/action_bookmark"
+        android:icon="@drawable/ic_bookmark_white_24dp"
+        android:orderInCategory="100"
+        android:title="@string/action_bookmark"
+        app:showAsAction="always" />
+</menu>
