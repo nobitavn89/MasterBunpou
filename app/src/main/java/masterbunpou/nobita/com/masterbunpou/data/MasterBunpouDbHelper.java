@@ -62,12 +62,12 @@ public class MasterBunpouDbHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         //we will copy database from assets folder, so leave onCreate empty
 //        db.execSQL(SQL_CREATE_ENTRIES);
-        try{
-            db = mContext.openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE, null);
-            db.close();
-        } catch (SQLiteException e) {
-            e.printStackTrace();
-        }
+//        try{
+//            db = mContext.openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE, null);
+//            db.close();
+//        } catch (SQLiteException e) {
+//            e.printStackTrace();
+//        }
     }
 
     @Override

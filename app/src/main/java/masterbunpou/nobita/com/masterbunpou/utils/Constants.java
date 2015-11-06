@@ -16,6 +16,7 @@ public class Constants {
     public static final String DISPLAY_TYPE = "com.masterbunpou.intent.display_type";
     public static final String CARD_ID = "com.masterbunpou.intent.card_id";
     public static final String VIEW_PAGER_ID = "view_pager_id";
+    public static final String DETAIL_VIEW_PAGER_ID = "detail_view_pager_id";
     public static final String CARD_DATA_TYPE = "com.masterbunpou.intent.card_data_type";
     public static final String CARD_VIEW_DISPLAY = "card_view";
     public static final String VIEW_PAGER_DISPLAY = "pager_view";

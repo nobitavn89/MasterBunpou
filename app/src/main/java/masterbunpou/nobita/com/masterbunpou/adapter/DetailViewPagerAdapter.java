@@ -11,6 +11,7 @@ import masterbunpou.nobita.com.masterbunpou.utils.Constants;
 
 /**
  * Created by nobitavn89 on 15/11/04.
+ * @deprecated
  */
 public class DetailViewPagerAdapter extends FragmentPagerAdapter{
     private int mPageSize;
