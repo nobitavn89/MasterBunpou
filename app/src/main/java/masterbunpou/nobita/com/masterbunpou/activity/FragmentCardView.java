@@ -4,6 +4,7 @@ package masterbunpou.nobita.com.masterbunpou.activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -55,6 +56,7 @@ public class FragmentCardView extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mType = (String)getArguments().get(Constants.CARD_DATA_TYPE);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(mType);
         View layout = inflater.inflate(R.layout.frag_card_view, container, false);
         mRecyclerView = (RecyclerView) layout.findViewById(R.id.recycle_view_card);
         mRecyclerView.setHasFixedSize(true);

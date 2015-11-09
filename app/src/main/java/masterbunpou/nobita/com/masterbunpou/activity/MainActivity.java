@@ -1,6 +1,8 @@
 package masterbunpou.nobita.com.masterbunpou.activity;
 
+import android.app.SearchManager;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -69,12 +72,7 @@ public class MainActivity extends AppCompatActivity implements FragmentNaviDrawe
         mDrawerFragment.setDrawerListener(this);
 
         //test
-        Intent intent = getIntent();
-        mCurrentCardData = Constants.CARD_TYPE_JLPT_N3;
-        mCurrentDisplay = Constants.CARD_VIEW_DISPLAY;
-        intent.putExtra(Constants.DISPLAY_TYPE, mCurrentDisplay);
-        intent.putExtra(Constants.CARD_DATA_TYPE, mCurrentCardData);
-        intent.putExtra(Constants.CARD_ID, 0);
+        setIntent(readHistory());
         changeView();
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -112,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements FragmentNaviDrawe
         Log.d(TAG, "onCreateOptionsMenu");
 //        menu.clear();
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
         return true;
     }
 
@@ -170,7 +169,15 @@ public class MainActivity extends AppCompatActivity implements FragmentNaviDrawe
             fragCard.setListener(this);
             fragmentTransaction.replace(R.id.container_body, fragCard);
             fragmentTransaction.commit();
-        } else {
+        } else if(position == 1) {
+            FragmentCardView fragCard = new FragmentCardView();
+            Bundle bundle = new Bundle();
+            bundle.putCharSequence(Constants.CARD_DATA_TYPE, Constants.CARD_TYPE_JLPT_N2);
+            fragCard.setArguments(bundle);
+            fragCard.setListener(this);
+            fragmentTransaction.replace(R.id.container_body, fragCard);
+            fragmentTransaction.commit();
+        }  else {
             BlankFragment blankFragment = new BlankFragment();
             fragmentTransaction.replace(R.id.container_body, blankFragment);
             fragmentTransaction.commit();
@@ -190,9 +197,25 @@ public class MainActivity extends AppCompatActivity implements FragmentNaviDrawe
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        Log.d(TAG, "onNewIntent: " + intent.getExtras().toString());
-        setIntent(intent);
+        if(intent.getExtras() == null) {
+            Log.d(TAG, "onNewIntent: intent extra is null");
+            setIntent(readHistory());
+        } else {
+            Log.d(TAG, "onNewIntent: " + intent.getExtras().toString());
+            setIntent(intent);
+        }
         changeView();
+    }
+
+    //TODO where did we stop last time? (shared pref)
+    private Intent readHistory() {
+        Intent intent = getIntent();
+        mCurrentCardData = Constants.CARD_TYPE_JLPT_N3;
+        mCurrentDisplay = Constants.CARD_VIEW_DISPLAY;
+        intent.putExtra(Constants.DISPLAY_TYPE, mCurrentDisplay);
+        intent.putExtra(Constants.CARD_DATA_TYPE, mCurrentCardData);
+        intent.putExtra(Constants.CARD_ID, 0);
+        return intent;
     }
 
     private void changeView() {

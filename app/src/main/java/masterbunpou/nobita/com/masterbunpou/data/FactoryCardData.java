@@ -19,6 +19,8 @@ public class FactoryCardData {
     public AbstractCardData createCardData(String type) {
        if(type == Constants.CARD_TYPE_JLPT_N3) {
             return new CardDataJLPTN3();
+       } else if (type == Constants.CARD_TYPE_JLPT_N2) {
+           return new CardDataJLPTN2();
        }
         return null;
     }
