@@ -36,6 +36,7 @@ public class FragmentNaviDrawer extends Fragment {
     private NavigationDrawerAdapter mAdapter;
     private View mContainView;
     private FragmentDrawerListener mDrawerListener;
+//    private BookmarkClickListener mBookmarkClickListener;
 
     private static String[] mTitles = null;
 
@@ -94,11 +95,13 @@ public class FragmentNaviDrawer extends Fragment {
             }
         }));
 
+        //quite stupid but we need to fix the position
         TextView txtBookMark = (TextView) layout.findViewById(R.id.txt_title_bookmark);
         txtBookMark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "This feature is coming soon", Toast.LENGTH_SHORT).show();
+                mDrawerListener.onDrawerItemSelected(null, 5);
                 mDrawerLayout.closeDrawer(mContainView);
             }
         });
@@ -154,5 +157,8 @@ public class FragmentNaviDrawer extends Fragment {
         void onDrawerItemSelected(View view, int position);
     }
 
+//    public interface BookmarkClickListener {
+//        void onClickListener();
+//    }
 
 }

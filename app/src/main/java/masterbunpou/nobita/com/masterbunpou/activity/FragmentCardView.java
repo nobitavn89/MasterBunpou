@@ -1,7 +1,6 @@
 package masterbunpou.nobita.com.masterbunpou.activity;
 
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -24,7 +23,6 @@ import masterbunpou.nobita.com.masterbunpou.adapter.CardViewAdapter;
 import masterbunpou.nobita.com.masterbunpou.data.DataManager;
 import masterbunpou.nobita.com.masterbunpou.listener.DataReceiverListener;
 import masterbunpou.nobita.com.masterbunpou.listener.FragmentItemClickListener;
-import masterbunpou.nobita.com.masterbunpou.listener.RecyclerTouchListener;
 import masterbunpou.nobita.com.masterbunpou.model.CardViewItem;
 import masterbunpou.nobita.com.masterbunpou.utils.Constants;
 
@@ -57,6 +55,7 @@ public class FragmentCardView extends Fragment {
                              Bundle savedInstanceState) {
         mType = (String)getArguments().get(Constants.CARD_DATA_TYPE);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(mType);
+
         View layout = inflater.inflate(R.layout.frag_card_view, container, false);
         mRecyclerView = (RecyclerView) layout.findViewById(R.id.recycle_view_card);
         mRecyclerView.setHasFixedSize(true);
@@ -78,9 +77,10 @@ public class FragmentCardView extends Fragment {
                 mProgressBar.setVisibility(View.GONE);
                 if(list.isEmpty()) {
                     Toast.makeText(getActivity(),getActivity().getString(R.string.no_data), Toast.LENGTH_SHORT).show();
+                } else {
+                    mAdapter = new CardViewAdapter(list);
+                    mRecyclerView.setAdapter(mAdapter);
                 }
-                mAdapter = new CardViewAdapter(list);
-                mRecyclerView.setAdapter(mAdapter);
             }
         });
 //        mAdapter = new CardViewAdapter(getData());

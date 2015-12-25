@@ -1,11 +1,8 @@
 package masterbunpou.nobita.com.masterbunpou.activity;
 
 import android.app.SearchManager;
-import android.content.ContentValues;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -19,20 +16,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
-
 import masterbunpou.nobita.com.masterbunpou.R;
-import masterbunpou.nobita.com.masterbunpou.data.BunpouEntry;
-import masterbunpou.nobita.com.masterbunpou.data.DataManager;
-import masterbunpou.nobita.com.masterbunpou.data.MasterBunpouDbHelper;
 import masterbunpou.nobita.com.masterbunpou.listener.FragmentItemClickListener;
-import masterbunpou.nobita.com.masterbunpou.model.CardViewItem;
 import masterbunpou.nobita.com.masterbunpou.utils.Constants;
 
 /*
@@ -111,6 +96,16 @@ public class MainActivity extends AppCompatActivity implements FragmentNaviDrawe
 //        menu.clear();
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
+        //from android developer - Associate searchable configuration with the SearchView
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        if(searchView != null ) {
+            searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+            searchView.setIconifiedByDefault(true);
+            searchView.setSubmitButtonEnabled(true);
+        } else {
+            Log.d(TAG, "searchView is null");
+        }
         return true;
     }
 
@@ -127,7 +122,6 @@ public class MainActivity extends AppCompatActivity implements FragmentNaviDrawe
         }
 
         if (id == R.id.action_search) {
-            Toast.makeText(MainActivity.this, "Search is coming soon", Toast.LENGTH_SHORT).show();
             return true;
         }
 
@@ -177,7 +171,15 @@ public class MainActivity extends AppCompatActivity implements FragmentNaviDrawe
             fragCard.setListener(this);
             fragmentTransaction.replace(R.id.container_body, fragCard);
             fragmentTransaction.commit();
-        }  else {
+        }  else if (position == 5) {
+            FragmentCardView fragCard = new FragmentCardView();
+            Bundle bundle = new Bundle();
+            bundle.putCharSequence(Constants.CARD_DATA_TYPE, Constants.CARD_TYPE_BOOKMARKS);
+            fragCard.setArguments(bundle);
+            fragCard.setListener(this);
+            fragmentTransaction.replace(R.id.container_body, fragCard);
+            fragmentTransaction.commit();
+        } else {
             BlankFragment blankFragment = new BlankFragment();
             fragmentTransaction.replace(R.id.container_body, blankFragment);
             fragmentTransaction.commit();

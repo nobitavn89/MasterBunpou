@@ -6,11 +6,14 @@ package masterbunpou.nobita.com.masterbunpou.model;
  */
 public class CardViewItem {
 
+    private int mCardId;
+    private int mCardEntryId;
     private String mCardType;
     private String mTitle;
     private String mMeaning;
     private String mUsage;
     private String mExample;
+    private int mIsBookmark;
 
     public CardViewItem() {
 
@@ -23,14 +26,33 @@ public class CardViewItem {
         mMeaning = meaning;
     }
 
-    public CardViewItem(String cardType, String title, String meaning, String usage, String ex) {
+    public CardViewItem(String cardType, String title, String meaning, String usage, String ex, int isBookmark) {
         mCardType = cardType;
         mTitle = title;
         mMeaning = meaning;
         mUsage = usage;
         mExample = ex;
+        mIsBookmark = isBookmark;
     }
 
+    public CardViewItem(int cardId, int cardEntryId, String cardType, String title, String meaning, String usage, String ex, int isBookmark) {
+        mCardId = cardId;
+        mCardEntryId = cardEntryId;
+        mCardType = cardType;
+        mTitle = title;
+        mMeaning = meaning;
+        mUsage = usage;
+        mExample = ex;
+        mIsBookmark = isBookmark;
+    }
+
+
+    public int getCardId () {
+        return mCardId;
+    }
+    public int getCardEntryId () {
+        return mCardEntryId;
+    }
     public String getTitle() {
         return mTitle;
     }
@@ -70,4 +92,13 @@ public class CardViewItem {
     public void setMeaning(String meaning) {
         mMeaning = meaning;
     }
+
+    public void setBookmarkState (int bookmarkState) {
+        mIsBookmark = bookmarkState;
+    }
+
+    public int getBookmarkState () {
+        return mIsBookmark;
+    }
+
 }

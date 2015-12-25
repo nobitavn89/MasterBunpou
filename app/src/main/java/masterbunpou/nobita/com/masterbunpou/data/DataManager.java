@@ -40,8 +40,10 @@ public class DataManager {
         if(mListData.get(type) != null) {
             listener.onDataReceive(mListData.get(type));
         } else {
-            LoadDataAsyncTask task = new LoadDataAsyncTask(context,type, listener);
+            LoadDataAsyncTask task = new LoadDataAsyncTask(context,type,listener);
             task.execute();
         }
     }
+
+//    public void doSearch(Context context, )
 }

@@ -35,12 +35,16 @@ public class CardDataJLPTN3 extends AbstractCardData {
             if (cursor != null) {
                 cursor.moveToFirst();
                 do {
+
                     String cardType = Constants.CARD_TYPE_JLPT_N3;
+                    int id = cursor.getInt(cursor.getColumnIndexOrThrow(BunpouEntry.COLUMN_BUNPOU_ID));
+                    int id_entry = cursor.getInt(cursor.getColumnIndexOrThrow(BunpouEntry.COLUMN_BUNPOU_ENTRY_ID));
                     String title = cursor.getString(cursor.getColumnIndexOrThrow(BunpouEntry.COLUMN_BUNPOU_ENTRY_TITLE));
                     String meaning = cursor.getString(cursor.getColumnIndexOrThrow(BunpouEntry.COLUMN_BUNPOU_ENTRY_MEANING));
                     String usage = cursor.getString(cursor.getColumnIndexOrThrow(BunpouEntry.COLUMN_BUNPOU_ENTRY_USAGE));
                     String example = cursor.getString(cursor.getColumnIndexOrThrow(BunpouEntry.COLUMN_BUNPOU_ENTRY_EXAMPLE));
-                    CardViewItem item = new CardViewItem(cardType,title, meaning, usage, example);
+                    int isBookmark = cursor.getInt(cursor.getColumnIndexOrThrow(BunpouEntry.COLUMN_BUNPOU_ENTRY_BOOKMARK));
+                    CardViewItem item = new CardViewItem(id, id_entry, cardType,title, meaning, usage, example, isBookmark);
                     retList.add(item);
                 } while (cursor.moveToNext());
             }

@@ -21,6 +21,8 @@ public class FactoryCardData {
             return new CardDataJLPTN3();
        } else if (type == Constants.CARD_TYPE_JLPT_N2) {
            return new CardDataJLPTN2();
+       } else if (type == Constants.CARD_TYPE_BOOKMARKS) {
+           return new CardDataBookmark();
        }
         return null;
     }

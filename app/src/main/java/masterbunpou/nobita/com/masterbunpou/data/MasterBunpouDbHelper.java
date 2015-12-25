@@ -2,7 +2,6 @@ package masterbunpou.nobita.com.masterbunpou.data;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
@@ -49,12 +48,14 @@ public class MasterBunpouDbHelper extends SQLiteOpenHelper {
         if(dbFile.exists()) {
             Log.i(TAG, "db already exist");
         } else {
+            Log.d(TAG, "db not available, copy it from asset");
             this.getReadableDatabase();
             try {
                 copyDatabase();
             } catch (IOException ie) {
                 ie.printStackTrace();
             }
+            this.close();
         }
     }
 

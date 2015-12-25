@@ -1,9 +1,9 @@
 package masterbunpou.nobita.com.masterbunpou.activity;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -15,47 +15,32 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.Collections;
 import java.util.List;
 
 import masterbunpou.nobita.com.masterbunpou.R;
-import masterbunpou.nobita.com.masterbunpou.adapter.SmartFragmentStatePagerAdapter;
 import masterbunpou.nobita.com.masterbunpou.model.CardViewItem;
 import masterbunpou.nobita.com.masterbunpou.utils.Constants;
 import masterbunpou.nobita.com.masterbunpou.utils.Utils;
 
 /**
  * Created by nobitavn89 on 15/11/04.
+ * similar to FragmentViewPager, but use to proceed bookmark data. Since
+ * we need some different methods, I create a new class
+ * Merge later
  */
-public class FragmentViewPager extends Fragment {
+public class FragmentViewPagerBookmark extends Fragment {
     private ViewPager mViewPager;
-    SmartDetailViewPagerAdapter mViewPagerAdapter;
+    FragmentViewPager.SmartDetailViewPagerAdapter mViewPagerAdapter;
     List<CardViewItem> mListData = Collections.emptyList();
     private static String mCardType;
     private int mFirstDisplay;
-    private int mIsBookmark;//is the current display item bookmarked?
-    public static class SmartDetailViewPagerAdapter extends SmartFragmentStatePagerAdapter<FragmentViewPagerDetails> {
-        private int mPageSize;
-
-        public  SmartDetailViewPagerAdapter(FragmentManager fm, int size) {
-            super(fm);
-            mPageSize = size;
-        }
-
-        @Override
-        public int getCount() {
-            return mPageSize;
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return FragmentViewPagerDetails.newInstance(position,mCardType);
-        }
-    }
+    private int mIsBookmark;
 
 
-    public  FragmentViewPager() {
+    public FragmentViewPagerBookmark() {
         //require empty constructor
     }
 
@@ -90,7 +75,7 @@ public class FragmentViewPager extends Fragment {
 
         int size = Utils.getData(getActivity(), mCardType).size();
         Log.d("nobita", "fragment created, size: " + size);
-        mViewPagerAdapter = new SmartDetailViewPagerAdapter(getFragmentManager(), size);
+        mViewPagerAdapter = new FragmentViewPager.SmartDetailViewPagerAdapter(getFragmentManager(), size);
         mViewPager.setAdapter(mViewPagerAdapter);
         mViewPager.setCurrentItem(mFirstDisplay);
         CardViewItem item = mListData.get(mFirstDisplay);
@@ -120,8 +105,8 @@ public class FragmentViewPager extends Fragment {
         mViewPager.setPageTransformer(false, new ViewPager.PageTransformer() {
             @Override
             public void transformPage(View page, float position) {
-//                int pageWidth = page.getWidth();
-//                int pageHeight = page.getHeight();
+                int pageWidth = page.getWidth();
+                int pageHeight = page.getHeight();
 
                 if(position < -1) {
                     //way-off screen to the left
@@ -164,35 +149,39 @@ public class FragmentViewPager extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d("nobita", "item click: " + item.getItemId());
         switch (item.getItemId()) {
             case android.R.id.home:
                 getActivity().onBackPressed();
                 return true;
             case R.id.action_bookmark:
+                Toast.makeText(getActivity(), "Bookmark for id: "+ mViewPager.getCurrentItem(), Toast.LENGTH_SHORT).show();
                 mIsBookmark = (mIsBookmark == 1 ? 0: 1);
                 int currentItem = mViewPager.getCurrentItem();
                 CardViewItem cardItem = mListData.get(currentItem);
                 cardItem.setBookmarkState(mIsBookmark);
                 mListData.set(currentItem, cardItem);
+
                 Utils.bookmarkCard(getActivity(), cardItem.getCardId(), mIsBookmark);
                 getActivity().invalidateOptionsMenu();
                 break;
             default:
+                Toast.makeText(getActivity(), "This feature is coming soon", Toast.LENGTH_SHORT).show();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
-//    private class setAdapterTask extends AsyncTask<Void, Void, Void> {
-//        @Override
-//        protected Void doInBackground(Void... params) {
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Void results) {
-//            mViewPager.setAdapter(mViewPagerAdapter);
-//            mViewPager.setCurrentItem(getArguments().getInt(Constants.VIEW_PAGER_ID));
-//        }
-//    }
+    private class setAdapterTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... params) {
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void results) {
+            mViewPager.setAdapter(mViewPagerAdapter);
+            mViewPager.setCurrentItem(getArguments().getInt(Constants.VIEW_PAGER_ID));
+        }
+    }
 }

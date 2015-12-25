@@ -21,4 +21,10 @@
         android:progressDrawable="@drawable/circular"
         />
 
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:id="@+id/txt_no_data"-->
+        <!--android:text="@string/no_data"/>-->
+
 </FrameLayout>

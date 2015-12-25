@@ -11,6 +11,7 @@ public class Constants {
     public static final String CARD_TYPE_JLPT_N4 = "N4";
     public static final String CARD_TYPE_JLPT_N5 = "N5";
     public static final String CARD_TYPE_BOOKMARKS = "BOOKMARKS";
+    public static final String CARD_TYPE_SEARCH = "SEARCH";
 
     //display type
     public static final String DISPLAY_TYPE = "com.masterbunpou.intent.display_type";
@@ -23,5 +24,13 @@ public class Constants {
 
     //database
     public static final String DATABASE_NAME = "MasterBunpou.db";
+    public static final String SEARCH_KEYWORD = "search_keyword";
 
+    //For detail_view
+    public static final String CARD_VIEW_DETAIL_ID = "card_view_detail_id";
+    public static final String CARD_VIEW_DETAIL_TITLE = "card_view_detail_title";
+    public static final String CARD_VIEW_DETAIL_MEANING = "card_view_detail_meaning";
+    public static final String CARD_VIEW_DETAIL_USAGE = "card_view_detail_usage";
+    public static final String CARD_VIEW_DETAIL_EXAMPLE = "card_view_detail_example";
+    public static final String CARD_VIEW_DETAIL_BOOKMARK_STATE = "card_view_detail_bookmark_state";
 }
