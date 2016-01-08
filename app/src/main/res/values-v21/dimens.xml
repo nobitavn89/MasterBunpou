@@ -1,0 +1,21 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="search_activity_horizontal_margin">8dp</dimen>
+    <dimen name="search_activity_vertical_margin">8dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="nav_drawer_width">220dp</dimen>
+    <dimen name="nav_drawer_jlpt_heigh">240dp</dimen>
+    <dimen name="text_size_nav_header">28dp</dimen>
+
+    <!--Card View-->
+    <dimen name="card_view_height">120dp</dimen>
+    <dimen name="card_view_width">200dp</dimen>
+    <dimen name="max_card_elevation">8dp</dimen>
+    <dimen name="card_view_radius">8dp</dimen>
+    <dimen name="card_view_elevation">8dp</dimen>
+    <dimen name="progress_bar_height">50dp</dimen>
+    <dimen name="progress_bar_width">50dp</dimen>
+
+</resources>
