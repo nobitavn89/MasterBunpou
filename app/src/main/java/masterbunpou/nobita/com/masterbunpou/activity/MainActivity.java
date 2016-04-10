@@ -14,7 +14,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import masterbunpou.nobita.com.masterbunpou.R;
 import masterbunpou.nobita.com.masterbunpou.listener.FragmentItemClickListener;
@@ -126,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements FragmentNaviDrawe
         }
 
         if (id == R.id.home) {
-            Toast.makeText(MainActivity.this, "Home is pressed", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(MainActivity.this, "Home is pressed", Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);
@@ -152,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements FragmentNaviDrawe
 
     @Override
     public void onDrawerItemSelected(View view, int position) {
-        Toast.makeText(this, "Click on item: " + position, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Click on item: " + position, Toast.LENGTH_SHORT).show();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         if (position == 2) {
@@ -188,7 +187,8 @@ public class MainActivity extends AppCompatActivity implements FragmentNaviDrawe
 
     @Override
     public void onFragmentItemSelected(View view, int position) {
-        Toast.makeText(this, "Click on item: " + position, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Click on item: " + position, Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "Click on item: " + position);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         FragmentCardViewDetails cardViewDetails = new FragmentCardViewDetails();
@@ -212,7 +212,7 @@ public class MainActivity extends AppCompatActivity implements FragmentNaviDrawe
     //TODO where did we stop last time? (shared pref)
     private Intent readHistory() {
         Intent intent = getIntent();
-        mCurrentCardData = Constants.CARD_TYPE_JLPT_N3;
+        mCurrentCardData = Constants.CARD_TYPE_JLPT_N2;
         mCurrentDisplay = Constants.CARD_VIEW_DISPLAY;
         intent.putExtra(Constants.DISPLAY_TYPE, mCurrentDisplay);
         intent.putExtra(Constants.CARD_DATA_TYPE, mCurrentCardData);

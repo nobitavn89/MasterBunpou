@@ -94,10 +94,10 @@ public class FragmentCardViewDetails extends Fragment {
                 getActivity().onBackPressed();
                 return true;
             case R.id.action_bookmark:
-                Toast.makeText(getActivity(), "catch event click on detail", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "catch event click on detail", Toast.LENGTH_SHORT).show();
                 return true;
             default:
-                Toast.makeText(getActivity(), "This feature is coming soon", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "This feature is coming soon", Toast.LENGTH_SHORT).show();
                 break;
         }
         return super.onOptionsItemSelected(item);

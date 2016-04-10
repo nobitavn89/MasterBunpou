@@ -100,7 +100,7 @@ public class FragmentNaviDrawer extends Fragment {
         txtBookMark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "This feature is coming soon", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "This feature is coming soon", Toast.LENGTH_SHORT).show();
                 mDrawerListener.onDrawerItemSelected(null, 5);
                 mDrawerLayout.closeDrawer(mContainView);
             }
